@@ -1,0 +1,510 @@
+// ===== THEME TOGGLE =====
+const themeToggle = document.getElementById('themeToggle');
+const htmlElement = document.documentElement;
+
+// Check saved theme preference
+const savedTheme = localStorage.getItem('theme') || 'light';
+if (savedTheme === 'dark') {
+  document.body.classList.add('dark-mode');
+  themeToggle.classList.add('active');
+}
+
+themeToggle.addEventListener('click', () => {
+  document.body.classList.toggle('dark-mode');
+  themeToggle.classList.toggle('active');
+  const isDark = document.body.classList.contains('dark-mode');
+  localStorage.setItem('theme', isDark ? 'dark' : 'light');
+});
+
+// ===== MOBILE NAVIGATION =====
+const navToggle = document.getElementById('navToggle');
+const navMenu = document.getElementById('navMenu');
+const navLinks = document.querySelectorAll('.nav-link');
+
+navToggle.addEventListener('click', () => {
+  navMenu.classList.toggle('active');
+  navToggle.classList.toggle('active');
+});
+
+// Close menu when link is clicked
+navLinks.forEach(link => {
+  link.addEventListener('click', () => {
+    navMenu.classList.remove('active');
+    navToggle.classList.remove('active');
+  });
+});
+
+// ===== FLOATING SHORTCUTS =====
+const emailBtn = document.getElementById('emailBtn');
+const githubBtn = document.getElementById('githubBtn');
+const linkedinBtn = document.getElementById('linkedinBtn');
+const phoneBtn = document.getElementById('phoneBtn');
+
+if (emailBtn) {
+  emailBtn.addEventListener('click', () => {
+    window.location.href = 'mailto:josephyammine06@gmail.com';
+  });
+}
+
+if (githubBtn) {
+  githubBtn.addEventListener('click', () => {
+    window.open('https://github.com/ZuzuYamn', '_blank');
+  });
+}
+
+if (linkedinBtn) {
+  linkedinBtn.addEventListener('click', () => {
+    window.open('https://www.linkedin.com/in/joseph-yammine-0066633a7', '_blank');
+  });
+}
+
+if (phoneBtn) {
+  phoneBtn.addEventListener('click', () => {
+    window.location.href = 'tel:+96181275199';
+  });
+}
+
+// ===== PROJECT MODAL =====
+const projectModal = document.getElementById('projectModal');
+const modalClose = document.getElementById('modalClose');
+const modalBody = document.getElementById('modalBody');
+const projectCards = document.querySelectorAll('.project-card');
+
+// Project data
+const projectsData = {
+  skylux: {
+    title: 'SkyLux Airlines',
+    overview: 'SkyLux is a modern front-end website for an airline where users can log in and book tickets seamlessly. The platform offers a complete booking experience with intuitive UI and responsive design.',
+    features: [
+      'User authentication and login flow',
+      'Advanced flight search and filtering',
+      'Multiple booking options (one-way, round-trip)',
+      'Cabin class selection (economy, business, first)',
+      'Interactive date pickers with validation',
+      'Real-time price calculation',
+      'Responsive and accessible design',
+      'Modern UI with smooth animations'
+    ],
+    technologies: 'HTML5, CSS3, JavaScript, Responsive Design',
+    highlights: [
+      'Built with vanilla HTML, CSS, and JavaScript - no frameworks',
+      'Fully responsive design that works on all devices',
+      'Accessibility features for keyboard navigation',
+      'Clean, maintainable code structure',
+      'Professional UI/UX implementation'
+    ],
+    links: {
+      github: 'https://github.com/ZuzuYamn',
+      demo: '#'
+    }
+  },
+  ums: {
+    title: 'University Management System',
+    overview: 'A comprehensive desktop application built with Python (Tkinter GUI) and SQLite database. The system manages university operations including student records, course management, GPA tracking, and academic reporting with role-based access control.',
+    features: [
+      'Role-based user authentication (Admin, Professor, Manager, Student)',
+      'Student registration and profile management',
+      'Course management and enrollment',
+      'GPA calculation per course',
+      'Comprehensive reporting and analytics',
+      'Database-backed persistence',
+      'User-friendly GUI interface',
+      'Data validation and error handling'
+    ],
+    technologies: 'Python, Tkinter, SQLite, OOP, Database Design',
+    highlights: [
+      'Normalized database schema for optimal data storage',
+      'Role-based access control for different user types',
+      'Real-time GPA tracking and calculations',
+      'Detailed academic reports and statistics',
+      'Secure user authentication system'
+    ],
+    links: {
+      github: 'https://github.com/ZuzuYamn',
+      demo: '#'
+    }
+  },
+  moviesdb: {
+    title: 'Movies Database',
+    overview: 'A sophisticated relational database design project for managing comprehensive movie industry data. Includes normalized schemas, complex analytical queries, and insights generation for movies, actors, cinemas, and streaming platforms.',
+    features: [
+      'Normalized relational database design',
+      'Movie information storage and management',
+      'Actor and cast management',
+      'Cinema and theater information',
+      'Streaming platform availability tracking',
+      'Pricing information for different platforms',
+      'Soundtrack and audio information',
+      'Age rating and classification system',
+      'Budget and revenue tracking',
+      'Complex analytical queries'
+    ],
+    technologies: 'SQL, Database Design, Entity-Relationship Model, Data Analysis',
+    highlights: [
+      'Top-10 highest-grossing movies analysis by year',
+      'Actor co-starring frequency analysis',
+      'Streaming platform ratings and comparisons',
+      'Cinema screening schedules and availability',
+      'Budget vs. Revenue performance metrics',
+      'Age-rating distribution across platforms',
+      'Complex JOIN operations and aggregations'
+    ],
+    links: {
+      github: 'https://github.com/ZuzuYamn',
+      demo: '#'
+    }
+  }
+};
+
+// Open modal with project details
+projectCards.forEach(card => {
+  const projectLink = card.querySelector('.project-link');
+  projectLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    const projectId = card.getAttribute('data-project');
+    const project = projectsData[projectId];
+    
+    modalBody.innerHTML = `
+      <h2>${project.title}</h2>
+      <h3 style="color: var(--primary); margin-top: 25px; margin-bottom: 10px; font-size: 1.3rem;">Overview</h3>
+      <p>${project.overview}</p>
+      
+      <h3 style="color: var(--primary); margin-top: 25px; margin-bottom: 10px; font-size: 1.3rem;">Key Features</h3>
+      <ul>
+        ${project.features.map(feature => `<li>${feature}</li>`).join('')}
+      </ul>
+      
+      <h3 style="color: var(--primary); margin-top: 25px; margin-bottom: 10px; font-size: 1.3rem;">Technologies</h3>
+      <p><strong>${project.technologies}</strong></p>
+      
+      <h3 style="color: var(--primary); margin-top: 25px; margin-bottom: 10px; font-size: 1.3rem;">Highlights</h3>
+      <ul>
+        ${project.highlights.map(highlight => `<li>${highlight}</li>`).join('')}
+      </ul>
+      
+      <div style="display: flex; gap: 15px; margin-top: 30px;">
+        <a href="${project.links.github}" target="_blank" rel="noopener" style="
+          flex: 1;
+          padding: 12px;
+          background: linear-gradient(135deg, #667eea, #764ba2);
+          color: white;
+          text-decoration: none;
+          border-radius: 8px;
+          text-align: center;
+          font-weight: 600;
+          transition: transform 0.3s ease;
+        " onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+          View on GitHub
+        </a>
+        <button onclick="document.getElementById('projectModal').classList.remove('active')" style="
+          flex: 1;
+          padding: 12px;
+          background: transparent;
+          color: #667eea;
+          border: 2px solid #667eea;
+          border-radius: 8px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          font-family: 'Poppins', sans-serif;
+        " onmouseover="this.style.backgroundColor='#667eea'; this.style.color='white'" onmouseout="this.style.backgroundColor='transparent'; this.style.color='#667eea'">
+          Close
+        </button>
+      </div>
+    `;
+    
+    projectModal.classList.add('active');
+  });
+});
+
+// Close modal
+modalClose.addEventListener('click', () => {
+  projectModal.classList.remove('active');
+});
+
+// Close modal when clicking outside
+projectModal.addEventListener('click', (e) => {
+  if (e.target === projectModal) {
+    projectModal.classList.remove('active');
+  }
+});
+
+// Close modal on Escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    projectModal.classList.remove('active');
+  }
+});
+
+// ===== CONTACT FORM =====
+const contactForm = document.getElementById('contactForm');
+
+if (contactForm) {
+  contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+    
+    if (!name || !email || !message) {
+      alert('Please fill in all fields');
+      return;
+    }
+    
+    // Validate email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      alert('Please enter a valid email address');
+      return;
+    }
+    
+    // Create mailto link
+    const subject = encodeURIComponent(`Portfolio Contact from ${name}`);
+    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+    const mailtoLink = `mailto:josephyammine06@gmail.com?subject=${subject}&body=${body}`;
+    
+    window.location.href = mailtoLink;
+    
+    // Reset form
+    contactForm.reset();
+  });
+}
+
+// ===== YEAR FOOTER =====
+const yearElement = document.getElementById('year');
+if (yearElement) {
+  yearElement.textContent = new Date().getFullYear();
+}
+
+// ===== SCROLL ANIMATIONS =====
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+      observer.unobserve(entry.target);
+    }
+  });
+}, observerOptions);
+
+// Observe elements with animation classes
+document.querySelectorAll('.project-card, .skill-category, .info-card, .timeline-item, .contact-item, .highlight-item').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+  observer.observe(el);
+});
+
+// ===== SMOOTH SCROLL FOR NAVIGATION =====
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    const href = this.getAttribute('href');
+    if (href !== '#' && document.querySelector(href)) {
+      e.preventDefault();
+      const target = document.querySelector(href);
+      const offsetTop = target.offsetTop - 70; // Account for fixed navbar
+      window.scrollTo({
+        top: offsetTop,
+        behavior: 'smooth'
+      });
+    }
+  });
+});
+
+// ===== NAVBAR SCROLL EFFECT =====
+const navbar = document.querySelector('.navbar');
+let lastScroll = 0;
+
+window.addEventListener('scroll', () => {
+  const currentScroll = window.pageYOffset;
+  
+  if (currentScroll > 100) {
+    navbar.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
+  } else {
+    navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.05)';
+  }
+  
+  lastScroll = currentScroll;
+});
+
+// ===== ACTIVE NAVIGATION LINK =====
+const sections = document.querySelectorAll('section');
+const navLinks2 = document.querySelectorAll('.nav-link');
+
+window.addEventListener('scroll', () => {
+  let current = '';
+  
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop;
+    const sectionHeight = section.clientHeight;
+    if (pageYOffset >= sectionTop - 200) {
+      current = section.getAttribute('id');
+    }
+  });
+  
+  navLinks2.forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('href').slice(1) === current) {
+      link.classList.add('active');
+    }
+  });
+});
+
+// Add active style to nav links
+const style = document.createElement('style');
+style.textContent = `
+  .nav-link.active::after {
+    width: 100% !important;
+  }
+`;
+document.head.appendChild(style);
+
+// ===== PARALLAX EFFECT =====
+window.addEventListener('scroll', () => {
+  const scrolled = window.pageYOffset;
+  const heroVisual = document.querySelector('.hero-visual');
+  if (heroVisual) {
+    heroVisual.style.transform = `translateY(${scrolled * 0.5}px)`;
+  }
+});
+
+// ===== FLOATING CARDS CLICK EFFECT =====
+document.querySelectorAll('.floating-card').forEach(card => {
+  card.addEventListener('click', () => {
+    card.style.animation = 'none';
+    setTimeout(() => {
+      card.style.animation = '';
+    }, 10);
+  });
+});
+
+// ===== FLOATING CARDS HOVER SOUND (Optional) =====
+document.querySelectorAll('.floating-card').forEach(card => {
+  card.addEventListener('mouseenter', function() {
+    this.style.cursor = 'pointer';
+  });
+});
+
+// ===== PAGE LOAD ANIMATION =====
+window.addEventListener('load', () => {
+  document.body.style.animation = 'fadeIn 0.5s ease';
+});
+
+// ===== FORM INPUT FOCUS EFFECTS =====
+const formInputs = document.querySelectorAll('.contact-form input, .contact-form textarea');
+formInputs.forEach(input => {
+  input.addEventListener('focus', function() {
+    this.style.transform = 'scale(1.02)';
+  });
+  
+  input.addEventListener('blur', function() {
+    this.style.transform = 'scale(1)';
+  });
+});
+
+// ===== SKILL TAGS ANIMATION =====
+document.querySelectorAll('.skill-tag').forEach(tag => {
+  tag.addEventListener('mouseenter', function() {
+    this.style.cursor = 'pointer';
+    this.style.transform = 'translateY(-3px)';
+  });
+  
+  tag.addEventListener('mouseleave', function() {
+    this.style.transform = 'translateY(0)';
+  });
+});
+
+// ===== CONSOLE MESSAGE =====
+console.log('%c🚀 Welcome to Joseph Yammine\'s Portfolio!', 'font-size: 20px; color: #667eea; font-weight: bold;');
+console.log('%cLooking for an internship? Let\'s connect! 💼', 'font-size: 14px; color: #764ba2;');
+console.log('%cEmail: josephyammine06@gmail.com | Phone: +961 81 275 199', 'font-size: 12px; color: #00f2fe;');
+console.log('%cGitHub: https://github.com/ZuzuYamn', 'font-size: 12px; color: #00f2fe;');
+
+// ===== PREVENT LAYOUT SHIFT =====
+document.addEventListener('DOMContentLoaded', function() {
+  // Smooth transitions for all elements
+  const allElements = document.querySelectorAll('*');
+  allElements.forEach(el => {
+    if (!el.style.transition) {
+      el.style.transition = 'background-color 0.3s ease, color 0.3s ease';
+    }
+  });
+});
+
+// ===== TOUCH SUPPORT FOR FLOATING CARDS =====
+document.querySelectorAll('.floating-card').forEach(card => {
+  card.addEventListener('touchstart', function() {
+    this.style.transform = 'scale(1.1)';
+  });
+  
+  card.addEventListener('touchend', function() {
+    this.style.transform = 'scale(1)';
+  });
+});
+
+// ===== BUTTON RIPPLE EFFECT =====
+function createRipple(event) {
+  const button = event.currentTarget;
+  const rect = button.getBoundingClientRect();
+  const radius = Math.max(rect.width, rect.height) / 2;
+  const x = event.clientX - rect.left - radius;
+  const y = event.clientY - rect.top - radius;
+  
+  const ripple = document.createElement('span');
+  ripple.style.position = 'absolute';
+  ripple.style.left = x + 'px';
+  ripple.style.top = y + 'px';
+  ripple.style.width = ripple.style.height = (radius * 2) + 'px';
+  ripple.style.borderRadius = '50%';
+  ripple.style.backgroundColor = 'rgba(255, 255, 255, 0.6)';
+  ripple.style.pointerEvents = 'none';
+  ripple.style.animation = 'ripple-animation 0.6s ease-out';
+  
+  button.appendChild(ripple);
+  
+  setTimeout(() => ripple.remove(), 600);
+}
+
+// Add ripple animation
+const style2 = document.createElement('style');
+style2.textContent = `
+  @keyframes ripple-animation {
+    to {
+      transform: scale(4);
+      opacity: 0;
+    }
+  }
+`;
+document.head.appendChild(style2);
+
+// ===== RESPONSIVE BEHAVIOR =====
+function handleResize() {
+  const isMobile = window.innerWidth < 768;
+  
+  if (isMobile) {
+    // Mobile-specific behavior
+    navMenu.classList.remove('active');
+    navToggle.classList.remove('active');
+  }
+}
+
+window.addEventListener('resize', handleResize);
+
+// ===== ERROR HANDLING =====
+window.addEventListener('error', function(event) {
+  console.error('Error occurred:', event.error);
+});
+
+// ===== PERFORMANCE OPTIMIZATION =====
+if ('IntersectionObserver' in window) {
+  // Use IntersectionObserver for lazy loading and animations
+} else {
+  // Fallback for older browsers
+  console.warn('IntersectionObserver not supported');
+}
