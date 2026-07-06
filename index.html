@@ -37,25 +37,56 @@
 
   <!-- Floating Shortcuts Sidebar -->
   <div class="floating-shortcuts" id="floatingShortcuts">
-    <button class="shortcut-btn" id="emailBtn" title="Email">✉</button>
-    <button class="shortcut-btn" id="githubBtn" title="GitHub">⚙</button>
-    <button class="shortcut-btn" id="linkedinBtn" title="LinkedIn">💼</button>
-    <button class="shortcut-btn" id="phoneBtn" title="Phone">☎</button>
+    <button class="shortcut-btn" id="phoneBtn" title="Phone">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+      </svg>
+    </button>
+    <button class="shortcut-btn" id="emailBtn" title="Email">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+      </svg>
+    </button>
+    <button class="shortcut-btn" id="githubBtn" title="GitHub">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+      </svg>
+    </button>
+    <button class="shortcut-btn" id="linkedinBtn" title="LinkedIn">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/>
+      </svg>
+    </button>
   </div>
 
   <!-- Info Section (Personal Card) -->
   <section id="info" class="info-banner">
     <div class="container">
       <div class="info-card-main">
-        <div class="info-avatar">👨‍💻</div>
+        <div class="info-avatar">
+          <svg class="avatar-icon" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="16 18 22 12 16 6"/>
+            <polyline points="8 6 2 12 8 18"/>
+          </svg>
+        </div>
         <div class="info-details">
           <h2>Joseph Yammine</h2>
           <p class="info-role"></p>
-          <p class="info-status">🔴 Currently Looking for Internship Opportunities</p>
+          <p class="info-status">
+            <span class="status-dot">🔴</span>
+            <span class="status-flip-wrap">
+              <span class="status-flip-text" id="statusFlipText"></span>
+            </span>
+          </p>
           <div class="info-quick-links">
             <a href="mailto:josephyammine06@gmail.com" class="info-link">✉ josephyammine06@gmail.com</a>
             <a href="tel:+96181275199" class="info-link">☎ +961 81 275 199</a>
-            <a href="https://github.com/ZuzuYamn" target="_blank" rel="noopener" class="info-link">⚙ GitHub</a>
+            <a href="https://github.com/ZuzuYamn" target="_blank" rel="noopener" class="info-link">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+              </svg>
+              ZuzuYamn
+            </a>
           </div>
         </div>
       </div>
@@ -75,7 +106,7 @@
         </p>
         <div class="hero-cta">
           <a href="#projects" class="btn btn-primary">View My Work</a>
-          <a href="#contact" class="btn btn-secondary">Let's Connect</a>
+          <a href="assets/resume.pdf" target="_blank" rel="noopener" class="btn btn-secondary">Let's Connect</a>
         </div>
         <div class="hero-socials">
           <a href="mailto:josephyammine06@gmail.com" title="Email" class="social-link">
@@ -123,10 +154,10 @@
       <div class="about-content">
         <div class="about-text">
           <p>
-            I'm a motivated Computer Science student at Lebanese University with a passion for building elegant digital solutions. I specialize in front-end development, Python applications, and database design.
+            Computer Science student at the Lebanese University with a dedicated focus on Artificial Intelligence, Machine Learning, and robust Software Engineering. Driven by the challenge of bridging low-level system architecture with high-level intelligent applications.          
           </p>
           <p>
-            With hands-on experience in web technologies and a strong foundation in software engineering principles, I'm eager to contribute to real-world projects and grow as a developer. I'm currently seeking internship opportunities to apply my skills in a professional environment.
+            Beyond the code, I am motivated by complex problem-solving and the opportunity to grow through rigorous intellectual challenges. I thrive in collaborative environments where I can support my peers, acting as a technical resource for others' projects and fostering a culture of collective success. I am a firm believer that the most elegant solutions are born from teamwork and the shared goal of pushing the boundaries of what is possible.
           </p>
           <div class="about-highlights">
             <div class="highlight-item">
@@ -227,7 +258,17 @@
       <div class="projects-grid">
         <!-- Project 1 -->
         <article class="project-card" data-project="skylux">
-          <div class="project-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+          <div class="project-image">
+            <img src="assets/skylux-al1.jpeg" class="carousel-slide active" alt="SkyLux Airlines screenshot 1">
+            <img src="assets/skylux-al2.jpg" class="carousel-slide" alt="SkyLux Airlines screenshot 2">
+            <img src="assets/skylux-al3.png" class="carousel-slide" alt="SkyLux Airlines screenshot 3">
+            <button class="carousel-arrow prev" aria-label="Previous image">&#8249;</button>
+            <button class="carousel-arrow next" aria-label="Next image">&#8250;</button>
+            <div class="carousel-dots">
+              <button class="carousel-dot active" data-index="0" aria-label="Show image 1"></button>
+              <button class="carousel-dot" data-index="1" aria-label="Show image 2"></button>
+              <button class="carousel-dot" data-index="2" aria-label="Show image 3"></button>
+            </div>
             <div class="project-overlay">
               <button class="project-link">View Details →</button>
             </div>
@@ -244,14 +285,24 @@
             </div>
             <div class="project-links">
               <a href="https://github.com/ZuzuYamn" target="_blank" rel="noopener" class="project-btn">Code</a>
-              <a href="#" class="project-btn btn-outline">Demo</a>
+              <button class="project-btn btn-outline view-details-btn">View Details</button>
             </div>
           </div>
         </article>
 
         <!-- Project 2 -->
         <article class="project-card" data-project="ums">
-          <div class="project-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+          <div class="project-image">
+            <img src="assets/ums1.jpeg" class="carousel-slide active" alt="University Management System screenshot 1">
+            <img src="assets/ums2.png" class="carousel-slide" alt="University Management System screenshot 2">
+            <img src="assets/ums3.png" class="carousel-slide" alt="University Management System screenshot 3">
+            <button class="carousel-arrow prev" aria-label="Previous image">&#8249;</button>
+            <button class="carousel-arrow next" aria-label="Next image">&#8250;</button>
+            <div class="carousel-dots">
+              <button class="carousel-dot active" data-index="0" aria-label="Show image 1"></button>
+              <button class="carousel-dot" data-index="1" aria-label="Show image 2"></button>
+              <button class="carousel-dot" data-index="2" aria-label="Show image 3"></button>
+            </div>
             <div class="project-overlay">
               <button class="project-link">View Details →</button>
             </div>
@@ -268,14 +319,24 @@
             </div>
             <div class="project-links">
               <a href="https://github.com/ZuzuYamn" target="_blank" rel="noopener" class="project-btn">Code</a>
-              <a href="#" class="project-btn btn-outline">Details</a>
+              <button class="project-btn btn-outline view-details-btn">View Details</button>
             </div>
           </div>
         </article>
 
         <!-- Project 3 -->
         <article class="project-card" data-project="moviesdb">
-          <div class="project-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+          <div class="project-image">
+            <img src="assets/movies-db1.png" class="carousel-slide active" alt="Movies Database screenshot 1">
+            <img src="assets/movies-db2.png" class="carousel-slide" alt="Movies Database screenshot 2">
+            <img src="assets/movies-db3.png" class="carousel-slide" alt="Movies Database screenshot 3">
+            <button class="carousel-arrow prev" aria-label="Previous image">&#8249;</button>
+            <button class="carousel-arrow next" aria-label="Next image">&#8250;</button>
+            <div class="carousel-dots">
+              <button class="carousel-dot active" data-index="0" aria-label="Show image 1"></button>
+              <button class="carousel-dot" data-index="1" aria-label="Show image 2"></button>
+              <button class="carousel-dot" data-index="2" aria-label="Show image 3"></button>
+            </div>
             <div class="project-overlay">
               <button class="project-link">View Details →</button>
             </div>
@@ -292,7 +353,7 @@
             </div>
             <div class="project-links">
               <a href="https://github.com/ZuzuYamn" target="_blank" rel="noopener" class="project-btn">Schema</a>
-              <a href="#" class="project-btn btn-outline">Queries</a>
+              <button class="project-btn btn-outline view-details-btn">View Details</button>
             </div>
           </div>
         </article>
@@ -363,26 +424,51 @@
       
       <div class="contact-content">
         <div class="contact-info">
-          <div class="contact-item">
-            <div class="contact-icon">✉</div>
-            <h3>Email</h3>
-            <a href="mailto:josephyammine06@gmail.com">josephyammine06@gmail.com</a>
-          </div>
-          <div class="contact-item">
-            <div class="contact-icon">📱</div>
-            <h3>Phone</h3>
-            <a href="tel:+96181275199">+961 81 275 199</a>
-          </div>
-          <div class="contact-item">
-            <div class="contact-icon">💼</div>
-            <h3>LinkedIn</h3>
-            <a href="https://www.linkedin.com/in/joseph-yammine-0066633a7" target="_blank" rel="noopener">Joseph Yammine</a>
-          </div>
-          <div class="contact-item">
-            <div class="contact-icon">⚙</div>
-            <h3>GitHub</h3>
-            <a href="https://github.com/ZuzuYamn" target="_blank" rel="noopener">ZuzuYamn</a>
-          </div>
+          <a href="mailto:josephyammine06@gmail.com" class="contact-item">
+            <div class="contact-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="4" width="20" height="16" rx="2"/>
+                <polyline points="22 6 12 13 2 6"/>
+              </svg>
+            </div>
+            <div class="contact-item-text">
+              <h3>Email</h3>
+              <span>josephyammine06@gmail.com</span>
+            </div>
+          </a>
+          <a href="tel:+96181275199" class="contact-item">
+            <div class="contact-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+            </div>
+            <div class="contact-item-text">
+              <h3>Phone</h3>
+              <span>+961 81 275 199</span>
+            </div>
+          </a>
+          <a href="https://www.linkedin.com/in/joseph-yammine-0066633a7" target="_blank" rel="noopener" class="contact-item">
+            <div class="contact-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="white" stroke="none">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.125 2.062 2.062 0 0 1 0 4.125zM7.114 20.452H3.558V9h3.556v11.452z"/>
+              </svg>
+            </div>
+            <div class="contact-item-text">
+              <h3>LinkedIn</h3>
+              <span>Joseph Yammine</span>
+            </div>
+          </a>
+          <a href="https://github.com/ZuzuYamn" target="_blank" rel="noopener" class="contact-item">
+            <div class="contact-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="white" stroke="none">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+              </svg>
+            </div>
+            <div class="contact-item-text">
+              <h3>GitHub</h3>
+              <span>ZuzuYamn</span>
+            </div>
+          </a>
         </div>
 
         <form class="contact-form" id="contactForm">

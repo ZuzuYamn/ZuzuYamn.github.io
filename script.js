@@ -34,6 +34,33 @@ navLinks.forEach(link => {
   });
 });
 
+// ===== STATUS BADGE TYPING ANIMATION =====
+const statusFlipText = document.getElementById('statusFlipText');
+const statusSentence = 'Available for internships and challenging projects.';
+const typingSpeed = 35;   // ms per character (fast typing)
+const holdDuration = 3000; // pause once fully typed before restarting
+
+if (statusFlipText) {
+  let charIndex = 0;
+
+  function typeStatusChar() {
+    if (charIndex < statusSentence.length) {
+      statusFlipText.textContent += statusSentence.charAt(charIndex);
+      charIndex++;
+      setTimeout(typeStatusChar, typingSpeed);
+    } else {
+      // Fully typed: hold for a few seconds, then clear and restart
+      setTimeout(() => {
+        charIndex = 0;
+        statusFlipText.textContent = '';
+        typeStatusChar();
+      }, holdDuration);
+    }
+  }
+
+  typeStatusChar();
+}
+
 // ===== FLOATING SHORTCUTS =====
 const emailBtn = document.getElementById('emailBtn');
 const githubBtn = document.getElementById('githubBtn');
@@ -157,63 +184,71 @@ const projectsData = {
 };
 
 // Open modal with project details
+function openProjectModal(projectId) {
+  const project = projectsData[projectId];
+  if (!project) return;
+
+  modalBody.innerHTML = `
+    <h2>${project.title}</h2>
+    <h3 style="color: var(--primary); margin-top: 25px; margin-bottom: 10px; font-size: 1.3rem;">Overview</h3>
+    <p>${project.overview}</p>
+    
+    <h3 style="color: var(--primary); margin-top: 25px; margin-bottom: 10px; font-size: 1.3rem;">Key Features</h3>
+    <ul>
+      ${project.features.map(feature => `<li>${feature}</li>`).join('')}
+    </ul>
+    
+    <h3 style="color: var(--primary); margin-top: 25px; margin-bottom: 10px; font-size: 1.3rem;">Technologies</h3>
+    <p><strong>${project.technologies}</strong></p>
+    
+    <h3 style="color: var(--primary); margin-top: 25px; margin-bottom: 10px; font-size: 1.3rem;">Highlights</h3>
+    <ul>
+      ${project.highlights.map(highlight => `<li>${highlight}</li>`).join('')}
+    </ul>
+    
+    <div style="display: flex; gap: 15px; margin-top: 30px;">
+      <a href="${project.links.github}" target="_blank" rel="noopener" style="
+        flex: 1;
+        padding: 12px;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        text-align: center;
+        font-weight: 600;
+        transition: transform 0.3s ease;
+      " onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+        View on GitHub
+      </a>
+      <button onclick="document.getElementById('projectModal').classList.remove('active')" style="
+        flex: 1;
+        padding: 12px;
+        background: transparent;
+        color: #667eea;
+        border: 2px solid #667eea;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-family: 'Poppins', sans-serif;
+      " onmouseover="this.style.backgroundColor='#667eea'; this.style.color='white'" onmouseout="this.style.backgroundColor='transparent'; this.style.color='#667eea'">
+        Close
+      </button>
+    </div>
+  `;
+
+  projectModal.classList.add('active');
+}
+
 projectCards.forEach(card => {
-  const projectLink = card.querySelector('.project-link');
-  projectLink.addEventListener('click', (e) => {
-    e.preventDefault();
-    const projectId = card.getAttribute('data-project');
-    const project = projectsData[projectId];
-    
-    modalBody.innerHTML = `
-      <h2>${project.title}</h2>
-      <h3 style="color: var(--primary); margin-top: 25px; margin-bottom: 10px; font-size: 1.3rem;">Overview</h3>
-      <p>${project.overview}</p>
-      
-      <h3 style="color: var(--primary); margin-top: 25px; margin-bottom: 10px; font-size: 1.3rem;">Key Features</h3>
-      <ul>
-        ${project.features.map(feature => `<li>${feature}</li>`).join('')}
-      </ul>
-      
-      <h3 style="color: var(--primary); margin-top: 25px; margin-bottom: 10px; font-size: 1.3rem;">Technologies</h3>
-      <p><strong>${project.technologies}</strong></p>
-      
-      <h3 style="color: var(--primary); margin-top: 25px; margin-bottom: 10px; font-size: 1.3rem;">Highlights</h3>
-      <ul>
-        ${project.highlights.map(highlight => `<li>${highlight}</li>`).join('')}
-      </ul>
-      
-      <div style="display: flex; gap: 15px; margin-top: 30px;">
-        <a href="${project.links.github}" target="_blank" rel="noopener" style="
-          flex: 1;
-          padding: 12px;
-          background: linear-gradient(135deg, #667eea, #764ba2);
-          color: white;
-          text-decoration: none;
-          border-radius: 8px;
-          text-align: center;
-          font-weight: 600;
-          transition: transform 0.3s ease;
-        " onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
-          View on GitHub
-        </a>
-        <button onclick="document.getElementById('projectModal').classList.remove('active')" style="
-          flex: 1;
-          padding: 12px;
-          background: transparent;
-          color: #667eea;
-          border: 2px solid #667eea;
-          border-radius: 8px;
-          font-weight: 600;
-          cursor: pointer;
-          transition: all 0.3s ease;
-          font-family: 'Poppins', sans-serif;
-        " onmouseover="this.style.backgroundColor='#667eea'; this.style.color='white'" onmouseout="this.style.backgroundColor='transparent'; this.style.color='#667eea'">
-          Close
-        </button>
-      </div>
-    `;
-    
-    projectModal.classList.add('active');
+  const projectId = card.getAttribute('data-project');
+  const triggers = card.querySelectorAll('.project-link, .view-details-btn');
+
+  triggers.forEach(trigger => {
+    trigger.addEventListener('click', (e) => {
+      e.preventDefault();
+      openProjectModal(projectId);
+    });
   });
 });
 
@@ -234,6 +269,117 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
     projectModal.classList.remove('active');
   }
+});
+
+// ===== PROJECT IMAGE CAROUSELS =====
+const carouselAutoDelay = 4000;   // ms between automatic slides
+const carouselTransitionMs = 700; // must match the CSS transition duration
+
+document.querySelectorAll('.project-image').forEach(container => {
+  const slides = Array.from(container.querySelectorAll('.carousel-slide'));
+  const dots = Array.from(container.querySelectorAll('.carousel-dot'));
+  const prevBtn = container.querySelector('.carousel-arrow.prev');
+  const nextBtn = container.querySelector('.carousel-arrow.next');
+
+  if (slides.length === 0) return;
+
+  let currentIndex = slides.findIndex(slide => slide.classList.contains('active'));
+  if (currentIndex === -1) currentIndex = 0;
+  let autoTimer = null;
+  let isAnimating = false;
+
+  // Picks whichever direction is the shorter path between two slide indices
+  function directionBetween(from, to) {
+    const total = slides.length;
+    const forward = (to - from + total) % total;
+    const backward = (from - to + total) % total;
+    return forward <= backward ? 'next' : 'prev';
+  }
+
+  function goToSlide(newIndex, direction) {
+    if (newIndex === currentIndex || isAnimating) return;
+    isAnimating = true;
+
+    const outgoing = slides[currentIndex];
+    const incoming = slides[newIndex];
+
+    // Place the incoming slide just off-screen (right for "next", left for "prev") instantly
+    incoming.classList.add('no-transition');
+    incoming.style.transform = direction === 'next' ? 'translateX(100%)' : 'translateX(-100%)';
+    incoming.style.zIndex = '2';
+    outgoing.style.zIndex = '1';
+    void incoming.offsetWidth; // force reflow so the jump registers with no animation
+    incoming.classList.remove('no-transition');
+
+    // Next frame: slide the outgoing slide out one side, incoming slide in from the other
+    requestAnimationFrame(() => {
+      outgoing.style.transform = direction === 'next' ? 'translateX(-100%)' : 'translateX(100%)';
+      incoming.style.transform = 'translateX(0)';
+    });
+
+    outgoing.classList.remove('active');
+    incoming.classList.add('active');
+
+    dots[currentIndex] && dots[currentIndex].classList.remove('active');
+    dots[newIndex] && dots[newIndex].classList.add('active');
+
+    currentIndex = newIndex;
+
+    setTimeout(() => {
+      // Reset the now-hidden slide back to its resting off-screen spot, ready for next use
+      outgoing.classList.add('no-transition');
+      outgoing.style.transform = 'translateX(100%)';
+      outgoing.style.zIndex = '0';
+      void outgoing.offsetWidth;
+      outgoing.classList.remove('no-transition');
+
+      incoming.style.zIndex = '1';
+      isAnimating = false;
+    }, carouselTransitionMs);
+  }
+
+  function startAutoPlay() {
+    stopAutoPlay();
+    autoTimer = setInterval(() => {
+      goToSlide((currentIndex + 1) % slides.length, 'next');
+    }, carouselAutoDelay);
+  }
+
+  function stopAutoPlay() {
+    if (autoTimer) {
+      clearInterval(autoTimer);
+      autoTimer = null;
+    }
+  }
+
+  function manualNavigate(newIndex, direction) {
+    goToSlide(newIndex, direction);
+    startAutoPlay(); // reset the timer so it doesn't jump right after a manual change
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      manualNavigate((currentIndex - 1 + slides.length) % slides.length, 'prev');
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      manualNavigate((currentIndex + 1) % slides.length, 'next');
+    });
+  }
+
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (i === currentIndex) return;
+      manualNavigate(i, directionBetween(currentIndex, i));
+    });
+  });
+
+  startAutoPlay();
 });
 
 // ===== CONTACT FORM =====
