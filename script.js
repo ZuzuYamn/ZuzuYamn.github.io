@@ -276,7 +276,9 @@ document.addEventListener('keydown', (e) => {
 const carouselAutoDelay = 4000;   // ms between automatic slides
 const carouselTransitionMs = 700; // must match the CSS transition duration
 
-const isTouchDevice = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+const isTouchDevice = ('ontouchstart' in window) ||
+  (navigator.maxTouchPoints > 0) ||
+  window.matchMedia('(hover: none), (pointer: coarse)').matches;
 const controlsRevealMs = 3000; // how long tapped controls stay visible before hiding again
 
 document.querySelectorAll('.project-image').forEach(container => {
@@ -298,18 +300,19 @@ document.querySelectorAll('.project-image').forEach(container => {
     }, controlsRevealMs);
   }
 
-  if (isTouchDevice) {
-    container.addEventListener('click', (e) => {
-      // Only the first tap (revealing controls) should be "consumed" here.
-      // Taps that land on an arrow/dot/details button are handled by their
-      // own listeners (which stopPropagation), so this only fires for taps
-      // on the raw image/backdrop.
-      if (!container.classList.contains('show-controls')) {
-        e.preventDefault();
-      }
-      showControls();
-    });
-  }
+  // Attached unconditionally (not just when isTouchDevice) so this can never
+  // silently fail to work on a phone whose browser misreports hover/pointer
+  // media features. Harmless on desktop: hover already reveals the overlay,
+  // and a click there just also (re)shows it for a few seconds.
+  container.addEventListener('click', (e) => {
+    // Taps that land on an arrow/dot/details button are handled by their
+    // own listeners (which stopPropagation), so this only fires for taps
+    // on the raw image/backdrop.
+    if (!container.classList.contains('show-controls')) {
+      e.preventDefault();
+    }
+    showControls();
+  });
 
   let currentIndex = slides.findIndex(slide => slide.classList.contains('active'));
   if (currentIndex === -1) currentIndex = 0;
