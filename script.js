@@ -247,6 +247,7 @@ projectCards.forEach(card => {
   triggers.forEach(trigger => {
     trigger.addEventListener('click', (e) => {
       e.preventDefault();
+      e.stopPropagation();
       openProjectModal(projectId);
     });
   });
@@ -275,6 +276,9 @@ document.addEventListener('keydown', (e) => {
 const carouselAutoDelay = 4000;   // ms between automatic slides
 const carouselTransitionMs = 700; // must match the CSS transition duration
 
+const isTouchDevice = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+const controlsRevealMs = 3000; // how long tapped controls stay visible before hiding again
+
 document.querySelectorAll('.project-image').forEach(container => {
   const slides = Array.from(container.querySelectorAll('.carousel-slide'));
   const dots = Array.from(container.querySelectorAll('.carousel-dot'));
@@ -282,6 +286,30 @@ document.querySelectorAll('.project-image').forEach(container => {
   const nextBtn = container.querySelector('.carousel-arrow.next');
 
   if (slides.length === 0) return;
+
+  // ----- Mobile: tap image to reveal arrows/overlay for a few seconds -----
+  let hideControlsTimer = null;
+
+  function showControls() {
+    container.classList.add('show-controls');
+    clearTimeout(hideControlsTimer);
+    hideControlsTimer = setTimeout(() => {
+      container.classList.remove('show-controls');
+    }, controlsRevealMs);
+  }
+
+  if (isTouchDevice) {
+    container.addEventListener('click', (e) => {
+      // Only the first tap (revealing controls) should be "consumed" here.
+      // Taps that land on an arrow/dot/details button are handled by their
+      // own listeners (which stopPropagation), so this only fires for taps
+      // on the raw image/backdrop.
+      if (!container.classList.contains('show-controls')) {
+        e.preventDefault();
+      }
+      showControls();
+    });
+  }
 
   let currentIndex = slides.findIndex(slide => slide.classList.contains('active'));
   if (currentIndex === -1) currentIndex = 0;
@@ -361,6 +389,7 @@ document.querySelectorAll('.project-image').forEach(container => {
     prevBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       manualNavigate((currentIndex - 1 + slides.length) % slides.length, 'prev');
+      if (isTouchDevice) showControls();
     });
   }
 
@@ -368,6 +397,7 @@ document.querySelectorAll('.project-image').forEach(container => {
     nextBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       manualNavigate((currentIndex + 1) % slides.length, 'next');
+      if (isTouchDevice) showControls();
     });
   }
 
@@ -376,6 +406,7 @@ document.querySelectorAll('.project-image').forEach(container => {
       e.stopPropagation();
       if (i === currentIndex) return;
       manualNavigate(i, directionBetween(currentIndex, i));
+      if (isTouchDevice) showControls();
     });
   });
 
@@ -571,17 +602,6 @@ console.log('%c🚀 Welcome to Joseph Yammine\'s Portfolio!', 'font-size: 20px; 
 console.log('%cLooking for an internship? Let\'s connect! 💼', 'font-size: 14px; color: #764ba2;');
 console.log('%cEmail: josephyammine06@gmail.com | Phone: +961 81 275 199', 'font-size: 12px; color: #00f2fe;');
 console.log('%cGitHub: https://github.com/ZuzuYamn', 'font-size: 12px; color: #00f2fe;');
-
-// ===== PREVENT LAYOUT SHIFT =====
-document.addEventListener('DOMContentLoaded', function() {
-  // Smooth transitions for all elements
-  const allElements = document.querySelectorAll('*');
-  allElements.forEach(el => {
-    if (!el.style.transition) {
-      el.style.transition = 'background-color 0.3s ease, color 0.3s ease';
-    }
-  });
-});
 
 // ===== TOUCH SUPPORT FOR FLOATING CARDS =====
 document.querySelectorAll('.floating-card').forEach(card => {

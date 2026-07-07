@@ -911,12 +911,15 @@ body.dark-mode .project-card {
   justify-content: center;
   cursor: pointer;
   opacity: 0;
+  pointer-events: none;
   transition: opacity 0.3s ease, background 0.3s ease;
   z-index: 5;
 }
 
-.project-image:hover .carousel-arrow {
+.project-image:hover .carousel-arrow,
+.project-image.show-controls .carousel-arrow {
   opacity: 1;
+  pointer-events: auto;
 }
 
 .carousel-arrow:hover {
@@ -972,12 +975,15 @@ body.dark-mode .project-card {
   align-items: center;
   justify-content: center;
   opacity: 0;
+  pointer-events: none;
   transition: var(--transition);
   z-index: 2;
 }
 
-.project-card:hover .project-overlay {
+.project-card:hover .project-overlay,
+.project-image.show-controls .project-overlay {
   opacity: 1;
+  pointer-events: auto;
 }
 
 .project-link {
