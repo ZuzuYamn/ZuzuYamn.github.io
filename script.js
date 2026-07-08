@@ -121,7 +121,7 @@ const projectsData = {
       'Professional UI/UX implementation'
     ],
     links: {
-      github: 'https://github.com/ZuzuYamn',
+      github: 'https://github.com/ZuzuYamn/SkyLux-Web-Development-Project.git',
       demo: '#'
     }
   },
@@ -147,7 +147,7 @@ const projectsData = {
       'Secure user authentication system'
     ],
     links: {
-      github: 'https://github.com/ZuzuYamn',
+      github: 'https://github.com/ZuzuYamn/University-Management-System-Project.git',
       demo: '#'
     }
   },
@@ -177,7 +177,7 @@ const projectsData = {
       'Complex JOIN operations and aggregations'
     ],
     links: {
-      github: 'https://github.com/ZuzuYamn',
+      github: 'https://github.com/ZuzuYamn/Movie-DataBase-Project.git',
       demo: '#'
     }
   }
