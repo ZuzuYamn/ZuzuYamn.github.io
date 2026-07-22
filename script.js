@@ -99,6 +99,32 @@ const projectCards = document.querySelectorAll('.project-card');
 
 // Project data
 const projectsData = {
+  ardana: {
+    title: 'Ardana — Agentic AI for Agriculture',
+    overview: 'Ardana is an agentic AI "farm manager" built to close the gap between the desire to farm and access to affordable, professional-grade agricultural expertise. It turns raw plant, weather, and diagnostic data into a clear, step-by-step action plan for small-scale and hobbyist farmers, especially in resource-constrained regions who would otherwise rely on trial and error.',
+    features: [
+      'My Farm module: AI auto-populates growth cycles and care requirements per plant species',
+      'Computer-vision plant identification and instant disease diagnosis with treatment guidance',
+      'Agentic, weather-aware irrigation alerts that adapt in real time (e.g. pausing reminders during rain)',
+      'Personalized scheduling logic factoring in plant species, plant age, and localized weather trends',
+      'Multi-lingual interface: Arabic, English, French, Spanish, and Portuguese',
+      'High-contrast, accessible design for users regardless of technical background'
+    ],
+    technologies: 'Gemini API (Gemini Flash), OpenWeather API, Computer Vision, Agentic AI, Prompt Engineering, Full-Stack (Replit)',
+    highlights: [
+      'Built at the LAU Academy of Continuing Education × Kanz AI Training Hackathon, July 15, 2026',
+      'Selected as the AI Showcase Featured Project among a cohort of professionals with 10–20 years of industry experience',
+      'Solved Gemini API rate-limiting/connectivity issues by optimizing around the Gemini Flash model for low-latency responses',
+      'Implemented full Right-to-Left (RTL) localization for a seamless Arabic user experience',
+      'Refined prompt engineering to combine plant species, plant age, and live weather data for accurate, non-generic recommendations',
+      'Certified by LAU Academy of Continuing Education & Kanz — Certificate ID: KANZ-ADV-2003'
+    ],
+    links: {
+      github: 'https://github.com/ZuzuYamn/Ardana.git',
+      demo: '#',
+      portfolio: 'https://try.ka.nz/ai/josephyammine'
+    }
+  },
   skylux: {
     title: 'SkyLux Airlines',
     overview: 'SkyLux is a modern front-end website for an airline where users can log in and book tickets seamlessly. The platform offers a complete booking experience with intuitive UI and responsive design.',
@@ -190,6 +216,22 @@ function openProjectModal(projectId) {
 
   modalBody.innerHTML = `
     <h2>${project.title}</h2>
+    ${project.links.portfolio ? `
+    <div style="text-align: center; margin: 20px 0;">
+      <a href="${project.links.portfolio}" target="_blank" rel="noopener" style="
+        display: inline-block;
+        padding: 12px 28px;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: transform 0.3s ease;
+      " onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+        Press Here to See Project's Portfolio →
+      </a>
+    </div>
+    ` : ''}
     <h3 style="color: var(--primary); margin-top: 25px; margin-bottom: 10px; font-size: 1.3rem;">Overview</h3>
     <p>${project.overview}</p>
     
