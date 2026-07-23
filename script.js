@@ -81,7 +81,7 @@ if (githubBtn) {
 
 if (linkedinBtn) {
   linkedinBtn.addEventListener('click', () => {
-    window.open('https://www.linkedin.com/in/joseph-yammine-0066633a7', '_blank');
+    window.open('https://www.linkedin.com/in/joseph-yammine06', '_blank');
   });
 }
 
